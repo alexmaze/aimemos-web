@@ -1,127 +1,127 @@
-# Quick Start Guide
+# 快速开始指南
 
-## Prerequisites
+## 前置要求
 
-1. **Backend Server**: You need to have the [aimemos](https://github.com/alexmaze/aimemos) backend running
+1. **后端服务器**：您需要运行 [aimemos](https://github.com/alexmaze/aimemos) 后端
    ```bash
-   # In the aimemos repository
+   # 在 aimemos 仓库中
    uv run aimemos
-   # Server will start on http://localhost:8000
+   # 服务器将在 http://localhost:8000 启动
    ```
 
-2. **Node.js**: Version 18 or higher
+2. **Node.js**：版本 18 或更高
 
-## Installation
+## 安装
 
-1. Clone and install:
+1. 克隆并安装：
    ```bash
    git clone https://github.com/alexmaze/aimemos-web.git
    cd aimemos-web
    npm install
    ```
 
-2. Configure environment:
+2. 配置环境：
    ```bash
    cp .env.example .env
    ```
    
-   Edit `.env` and set:
+   编辑 `.env` 并设置：
    ```
    VITE_API_BASE_URL=http://localhost:8000
    ```
 
-3. Start development server:
+3. 启动开发服务器：
    ```bash
    npm run dev
    ```
    
-   Open http://localhost:5173 in your browser
+   在浏览器中打开 http://localhost:5173
 
-## First Use
+## 首次使用
 
-1. **Register Account**: Click "Sign up" on the login page
-2. **Create Knowledge Base**: Navigate to Knowledge Bases → New Knowledge Base
-3. **Add Documents**: 
-   - Click on a knowledge base to view documents
-   - Create notes with "New Note"
-   - Upload files with "Upload"
-   - Organize with "New Folder"
-4. **Use Memos**: Quick notes for daily thoughts at Memos page
-5. **Chat with AI**: 
-   - Go to Chat page
-   - Create new session
-   - Select a knowledge base for RAG-powered responses
-   - Start chatting!
+1. **注册账户**：在登录页面点击"注册"
+2. **创建知识库**：导航到知识库 → 新建知识库
+3. **添加文档**： 
+   - 点击知识库查看文档
+   - 使用"新建笔记"创建笔记
+   - 使用"上传"上传文件
+   - 使用"新建文件夹"组织
+4. **使用备忘录**：在备忘录页面记录日常想法的快速笔记
+5. **与 AI 对话**： 
+   - 转到对话页面
+   - 创建新会话
+   - 选择知识库以获得 RAG 驱动的回复
+   - 开始对话！
 
-## Common Tasks
+## 常见任务
 
-### Create a Memo
-1. Go to Memos page
-2. Click "New Memo"
-3. Enter title, content, and optional tags
-4. Click "Create"
+### 创建备忘录
+1. 转到备忘录页面
+2. 点击"新建备忘录"
+3. 输入标题、内容和可选标签
+4. 点击"创建"
 
-### Create a Note
-1. Navigate to Knowledge Bases
-2. Click on a knowledge base
-3. Click "New Note"
-4. Write in Markdown format
-5. Use "Preview" to see rendered content
-6. Click "Save"
+### 创建笔记
+1. 导航到知识库
+2. 点击知识库
+3. 点击"新建笔记"
+4. 使用 Markdown 格式书写
+5. 使用"预览"查看渲染内容
+6. 点击"保存"
 
-### Upload a Document
-1. Navigate to a knowledge base
-2. Click "Upload"
-3. Select file (PDF, Word, Markdown, etc.)
-4. Add optional summary
-5. Click "Upload"
+### 上传文档
+1. 导航到知识库
+2. 点击"上传"
+3. 选择文件（PDF、Word、Markdown 等）
+4. 添加可选摘要
+5. 点击"上传"
 
-### Chat with Knowledge Base
-1. Go to Chat page
-2. Click "New Chat"
-3. Enter a title
-4. Select knowledge base (enables RAG)
-5. Type your question and send
+### 与知识库对话
+1. 转到对话页面
+2. 点击"新建对话"
+3. 输入标题
+4. 选择知识库（启用 RAG）
+5. 输入您的问题并发送
 
-## Production Build
+## 生产构建
 
 ```bash
 npm run build
-npm run preview  # Preview production build
+npm run preview  # 预览生产构建
 ```
 
-For deployment, serve the `dist` directory with any static file server.
+对于部署，使用任何静态文件服务器提供 `dist` 目录。
 
-## Troubleshooting
+## 故障排除
 
-**Can't connect to API**
-- Ensure aimemos backend is running on port 8000
-- Check VITE_API_BASE_URL in .env file
-- Check browser console for CORS errors
+**无法连接到 API**
+- 确保 aimemos 后端在 8000 端口运行
+- 检查 .env 文件中的 VITE_API_BASE_URL
+- 检查浏览器控制台的 CORS 错误
 
-**Build errors**
-- Delete node_modules and package-lock.json
-- Run `npm install` again
-- Ensure Node.js version is 18+
+**构建错误**
+- 删除 node_modules 和 package-lock.json
+- 再次运行 `npm install`
+- 确保 Node.js 版本为 18+
 
-**Login not working**
-- Check that backend has ENABLE_REGISTRATION=true
-- Verify SECRET_KEY is set in backend
-- Clear browser localStorage and try again
+**登录不工作**
+- 检查后端的 ENABLE_REGISTRATION=true
+- 验证后端设置了 SECRET_KEY
+- 清除浏览器 localStorage 并重试
 
-## Development
+## 开发
 
 ```bash
-npm run dev      # Start dev server
-npm run build    # Build for production
-npm run preview  # Preview production build
-npm run lint     # Run ESLint
+npm run dev      # 启动开发服务器
+npm run build    # 构建生产版本
+npm run preview  # 预览生产构建
+npm run lint     # 运行 ESLint
 ```
 
-## Architecture
+## 架构
 
-- **State Management**: Zustand for auth state
-- **Routing**: React Router v6 with protected routes
-- **API Client**: Axios with auth interceptors
-- **Styling**: TailwindCSS with custom utilities
-- **Type Safety**: Full TypeScript coverage
+- **状态管理**：Zustand 用于认证状态
+- **路由**：React Router v6 带保护路由
+- **API 客户端**：Axios 带认证拦截器
+- **样式**：TailwindCSS 带自定义工具类
+- **类型安全**：完整的 TypeScript 覆盖

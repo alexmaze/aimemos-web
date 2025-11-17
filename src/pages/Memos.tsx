@@ -78,7 +78,7 @@ export default function Memos() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this memo?')) return;
+    if (!confirm('确定要删除这个备忘录吗？')) return;
     try {
       await memoApi.delete(id);
       loadMemos();
@@ -124,7 +124,7 @@ export default function Memos() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-              placeholder="Search memos..."
+              placeholder="搜索备忘录..."
               className="input-field pl-10"
             />
           </div>
@@ -135,10 +135,10 @@ export default function Memos() {
 
         {/* Memos List */}
         {loading ? (
-          <div className="text-center py-12 text-gray-500">Loading...</div>
+          <div className="text-center py-12 text-gray-500">加载中...</div>
         ) : memos.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-gray-500 mb-4">No memos yet</p>
+            <p className="text-gray-500 mb-4">还没有备忘录</p>
             <button onClick={handleCreate} className="btn-primary">
               Create Your First Memo
             </button>
@@ -197,7 +197,7 @@ export default function Memos() {
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-gray-900">
-                    {editingMemo ? 'Edit Memo' : 'New Memo'}
+                    {editingMemo ? '编辑备忘录' : '新建备忘录'}
                   </h2>
                   <button
                     onClick={() => setShowModal(false)}
@@ -254,7 +254,7 @@ export default function Memos() {
                           }
                         }}
                         className="input-field flex-1"
-                        placeholder="Add a tag..."
+                        placeholder="添加标签..."
                       />
                       <button
                         type="button"
@@ -293,7 +293,7 @@ export default function Memos() {
                       Cancel
                     </button>
                     <button type="submit" className="btn-primary">
-                      {editingMemo ? 'Update' : 'Create'}
+                      {editingMemo ? '更新' : '创建'}
                     </button>
                   </div>
                 </form>

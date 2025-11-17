@@ -86,7 +86,7 @@ export default function DocumentEditor() {
   if (loading) {
     return (
       <Layout>
-        <div className="text-center py-12 text-gray-500">Loading...</div>
+        <div className="text-center py-12 text-gray-500">加载中...</div>
       </Layout>
     );
   }
@@ -126,7 +126,7 @@ export default function DocumentEditor() {
               className="btn-primary flex items-center"
             >
               <Save className="w-5 h-5 mr-2" />
-              {saving ? 'Saving...' : 'Save'}
+              {saving ? '保存中...' : '保存'}
             </button>
           </div>
         </div>
@@ -142,7 +142,7 @@ export default function DocumentEditor() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="input-field text-2xl font-bold"
-              placeholder="Untitled Document"
+              placeholder="无标题文档"
               required
             />
           </div>
@@ -156,7 +156,7 @@ export default function DocumentEditor() {
               value={summary}
               onChange={(e) => setSummary(e.target.value)}
               className="input-field"
-              placeholder="Brief summary of the document..."
+              placeholder="文档的简要摘要..."
             />
           </div>
 
@@ -175,7 +175,7 @@ export default function DocumentEditor() {
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
                 className="input-field min-h-[500px] font-mono text-sm"
-                placeholder="Write your content in Markdown..."
+                placeholder="使用 Markdown 编写内容..."
               />
             )}
             <p className="mt-2 text-sm text-gray-500">

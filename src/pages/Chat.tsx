@@ -102,7 +102,7 @@ export default function Chat() {
   };
 
   const handleDeleteSession = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this chat session?')) return;
+    if (!confirm('确定要删除这个对话会话吗？')) return;
     try {
       await chatApi.deleteSession(id);
       setSessions(sessions.filter((s) => s.id !== id));
@@ -281,7 +281,7 @@ export default function Chat() {
               {/* Messages */}
               <div className="flex-1 overflow-y-auto p-6 space-y-4">
                 {loading ? (
-                  <div className="text-center text-gray-500">Loading...</div>
+                  <div className="text-center text-gray-500">加载中...</div>
                 ) : messages.length === 0 ? (
                   <div className="text-center text-gray-500 py-12">
                     Start a conversation by sending a message below
@@ -330,7 +330,7 @@ export default function Chat() {
                     type="text"
                     value={inputMessage}
                     onChange={(e) => setInputMessage(e.target.value)}
-                    placeholder="Type your message..."
+                    placeholder="输入您的消息..."
                     className="input-field flex-1"
                     disabled={sending}
                   />
@@ -348,7 +348,7 @@ export default function Chat() {
             <div className="flex-1 flex items-center justify-center text-gray-500">
               <div className="text-center">
                 <MessageSquare className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                <p className="mb-4">No chat session selected</p>
+                <p className="mb-4">未选择对话会话</p>
                 <button
                   onClick={() => setShowNewSessionModal(true)}
                   className="btn-primary"
@@ -366,7 +366,7 @@ export default function Chat() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-apple shadow-apple-lg max-w-md w-full p-6">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-gray-900">New Chat</h2>
+              <h2 className="text-2xl font-bold text-gray-900">新建对话</h2>
               <button
                 onClick={() => setShowNewSessionModal(false)}
                 className="text-gray-400 hover:text-gray-600"
@@ -400,7 +400,7 @@ export default function Chat() {
                   onChange={(e) => setNewSessionKbId(e.target.value)}
                   className="input-field"
                 >
-                  <option value="">None - General chat</option>
+                  <option value="">无 - 普通对话</option>
                   {knowledgeBases.map((kb) => (
                     <option key={kb.id} value={kb.id}>
                       {kb.name}

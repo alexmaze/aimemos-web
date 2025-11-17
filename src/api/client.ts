@@ -14,7 +14,7 @@ class ApiClient {
       },
     });
 
-    // Request interceptor to add auth token
+    // 请求拦截器，添加认证令牌
     this.client.interceptors.request.use(
       (config) => {
         const token = localStorage.getItem('access_token');
@@ -28,12 +28,12 @@ class ApiClient {
       }
     );
 
-    // Response interceptor to handle errors
+    // 响应拦截器，处理错误
     this.client.interceptors.response.use(
       (response) => response,
       (error: AxiosError) => {
         if (error.response?.status === 401) {
-          // Clear token and redirect to login
+          // 清除令牌并重定向到登录页
           localStorage.removeItem('access_token');
           localStorage.removeItem('user_id');
           window.location.href = '/login';

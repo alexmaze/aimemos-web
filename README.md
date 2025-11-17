@@ -1,142 +1,141 @@
 # aimemos-web
 
-Web frontend for the [aimemos](https://github.com/alexmaze/aimemos) project - an AI-powered personal knowledge management system.
+[aimemos](https://github.com/alexmaze/aimemos) 项目的 Web 前端 - 一个 AI 驱动的个人知识管理系统。
 
-## Features
+## 功能特性
 
-- **Memos**: Lightweight notes for quick thoughts and reminders
-- **Knowledge Bases**: Organized collections of documents and notes
-- **Document Management**: Create, edit, and organize Markdown notes and upload various document formats
-- **AI Chat**: Interactive chat with AI assistant powered by your knowledge bases (RAG)
-- **Clean UI**: Apple-inspired design with a focus on simplicity and elegance
+- **备忘录**：用于快速记录想法和提醒的轻量级笔记
+- **知识库**：文档和笔记的有序集合
+- **文档管理**：创建、编辑和组织 Markdown 笔记，上传各种文档格式
+- **AI 对话**：与基于知识库的 AI 助手进行交互式对话（RAG）
+- **简洁 UI**：受 Apple 设计启发，专注于简洁和优雅
 
-## Tech Stack
+## 技术栈
 
-- **React 18** - Modern UI library
-- **TypeScript** - Type-safe development
-- **Vite** - Fast build tool and dev server
-- **React Router** - Client-side routing
-- **Zustand** - Lightweight state management
-- **TailwindCSS** - Utility-first CSS framework
-- **Axios** - HTTP client for API calls
-- **Lucide React** - Beautiful icon library
-- **React Markdown** - Markdown rendering
+- **React 18** - 现代 UI 库
+- **TypeScript** - 类型安全开发
+- **Vite** - 快速构建工具和开发服务器
+- **React Router** - 客户端路由
+- **Zustand** - 轻量级状态管理
+- **TailwindCSS** - 实用优先的 CSS 框架
+- **Axios** - HTTP 客户端
+- **Lucide React** - 精美图标库
+- **React Markdown** - Markdown 渲染
 
-## Prerequisites
+## 前置要求
 
-- Node.js 18+ and npm
-- Running instance of [aimemos](https://github.com/alexmaze/aimemos) backend
+- Node.js 18+ 和 npm
+- 运行中的 [aimemos](https://github.com/alexmaze/aimemos) 后端实例
 
-## Installation
+## 安装
 
-1. Clone the repository:
+1. 克隆仓库：
 ```bash
 git clone https://github.com/alexmaze/aimemos-web.git
 cd aimemos-web
 ```
 
-2. Install dependencies:
+2. 安装依赖：
 ```bash
 npm install
 ```
 
-3. Create environment file:
+3. 创建环境文件：
 ```bash
 cp .env.example .env
 ```
 
-4. Configure the API endpoint in `.env`:
+4. 在 `.env` 中配置 API 端点：
 ```
 VITE_API_BASE_URL=http://localhost:8000
 ```
 
-## Development
+## 开发
 
-Start the development server:
+启动开发服务器：
 ```bash
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
+应用将在 `http://localhost:5173` 可用
 
-## Build
+## 构建
 
-Build for production:
+生产环境构建：
 ```bash
 npm run build
 ```
 
-Preview production build:
+预览生产构建：
 ```bash
 npm run preview
 ```
 
-## Project Structure
+## 项目结构
 
 ```
 src/
-├── api/              # API client and service modules
-├── components/       # Reusable React components
-├── pages/            # Page components
-├── stores/           # Zustand state stores
-├── types/            # TypeScript type definitions
-├── utils/            # Utility functions
-├── App.tsx           # Main app component with routing
-├── main.tsx          # Application entry point
-└── index.css         # Global styles and Tailwind directives
+├── api/              # API 客户端和服务模块
+├── components/       # 可复用 React 组件
+├── pages/            # 页面组件
+├── stores/           # Zustand 状态存储
+├── types/            # TypeScript 类型定义
+├── utils/            # 工具函数
+├── App.tsx           # 主应用组件与路由
+├── main.tsx          # 应用入口点
+└── index.css         # 全局样式和 Tailwind 指令
 ```
 
-## Usage
+## 使用
 
-### First Time Setup
+### 首次设置
 
-1. Start the aimemos backend server
-2. Open the frontend application in your browser
-3. Register a new account or login
-4. Create your first knowledge base
-5. Add documents and notes
-6. Start chatting with the AI assistant
+1. 启动 aimemos 后端服务器
+2. 在浏览器中打开前端应用
+3. 注册新账户或登录
+4. 创建您的第一个知识库
+5. 添加文档和笔记
+6. 开始与 AI 助手对话
 
-### Features Guide
+### 功能指南
 
-#### Memos
-- Quick, lightweight notes for daily thoughts
-- Tag-based organization
-- Full-text search
+#### 备忘录
+- 用于日常想法的快速轻量级笔记
+- 基于标签的组织
+- 全文搜索
 
-#### Knowledge Bases
-- Organize documents by topic or project
-- Support for folders and hierarchical structure
-- Upload documents (PDF, Word, Markdown, etc.)
+#### 知识库
+- 按主题或项目组织文档
+- 支持文件夹和层级结构
+- 上传文档（PDF、Word、Markdown 等）
 
-#### Documents
-- Create and edit Markdown notes
-- Upload external documents
-- Organize with folders
-- Search across all documents
+#### 文档
+- 创建和编辑 Markdown 笔记
+- 上传外部文档
+- 使用文件夹组织
+- 跨所有文档搜索
 
-#### AI Chat
-- Create chat sessions
-- Associate sessions with knowledge bases for RAG-powered responses
-- View conversation history
-- Access to knowledge base context
+#### AI 对话
+- 创建对话会话
+- 将会话与知识库关联以获得 RAG 驱动的回复
+- 查看对话历史
+- 访问知识库上下文
 
-## API Integration
+## API 集成
 
-The frontend connects to the aimemos backend API. Key endpoints:
+前端连接到 aimemos 后端 API。主要端点：
 
-- `/api/v1/auth/*` - Authentication
-- `/api/v1/memos/*` - Memo management
-- `/api/v1/knowledge-bases/*` - Knowledge base management
-- `/api/v1/documents/*` - Document management
-- `/api/v1/chats/*` - Chat sessions and messages
+- `/api/v1/auth/*` - 认证
+- `/api/v1/memos/*` - 备忘录管理
+- `/api/v1/knowledge-bases/*` - 知识库管理
+- `/api/v1/documents/*` - 文档管理
+- `/api/v1/chats/*` - 对话会话和消息
 
-## License
+## 许可证
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件。
 
-## Acknowledgments
+## 致谢
 
-- Backend API: [aimemos](https://github.com/alexmaze/aimemos)
-- Design inspiration: Apple's design principles
-
+- 后端 API：[aimemos](https://github.com/alexmaze/aimemos)
+- 设计灵感：Apple 的设计原则

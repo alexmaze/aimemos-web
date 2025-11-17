@@ -63,7 +63,7 @@ export default function KnowledgeBases() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this knowledge base?'))
+    if (!confirm('确定要删除这个知识库吗？'))
       return;
     try {
       await knowledgeBaseApi.delete(id);
@@ -81,7 +81,7 @@ export default function KnowledgeBases() {
     <Layout>
       <div className="space-y-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-3xl font-bold text-gray-900">Knowledge Bases</h1>
+          <h1 className="text-3xl font-bold text-gray-900">知识库</h1>
           <button onClick={handleCreate} className="btn-primary flex items-center">
             <Plus className="w-5 h-5 mr-2" />
             New Knowledge Base
@@ -89,11 +89,11 @@ export default function KnowledgeBases() {
         </div>
 
         {loading ? (
-          <div className="text-center py-12 text-gray-500">Loading...</div>
+          <div className="text-center py-12 text-gray-500">加载中...</div>
         ) : kbs.length === 0 ? (
           <div className="text-center py-12">
             <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500 mb-4">No knowledge bases yet</p>
+            <p className="text-gray-500 mb-4">还没有知识库</p>
             <button onClick={handleCreate} className="btn-primary">
               Create Your First Knowledge Base
             </button>
@@ -158,7 +158,7 @@ export default function KnowledgeBases() {
               <div className="p-6">
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-2xl font-bold text-gray-900">
-                    {editingKb ? 'Edit Knowledge Base' : 'New Knowledge Base'}
+                    {editingKb ? '编辑知识库' : '新建知识库'}
                   </h2>
                   <button
                     onClick={() => setShowModal(false)}
@@ -212,7 +212,7 @@ export default function KnowledgeBases() {
                       Cancel
                     </button>
                     <button type="submit" className="btn-primary">
-                      {editingKb ? 'Update' : 'Create'}
+                      {editingKb ? '更新' : '创建'}
                     </button>
                   </div>
                 </form>

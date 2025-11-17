@@ -121,7 +121,7 @@ export default function Documents() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this?')) return;
+    if (!confirm('确定要删除吗？')) return;
     try {
       await documentApi.delete(id);
       loadDocuments();
@@ -158,7 +158,7 @@ export default function Documents() {
             <span className="text-gray-900 font-medium">{kb?.name}</span>
           </div>
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold text-gray-900">Documents</h1>
+            <h1 className="text-3xl font-bold text-gray-900">文档</h1>
             <div className="flex space-x-2">
               <button
                 onClick={() => setShowCreateFolder(true)}
@@ -213,7 +213,7 @@ export default function Documents() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-              placeholder="Search documents..."
+              placeholder="搜索文档..."
               className="input-field pl-10"
             />
           </div>
@@ -224,11 +224,11 @@ export default function Documents() {
 
         {/* Documents Grid */}
         {loading ? (
-          <div className="text-center py-12 text-gray-500">Loading...</div>
+          <div className="text-center py-12 text-gray-500">加载中...</div>
         ) : documents.length === 0 ? (
           <div className="text-center py-12">
             <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-            <p className="text-gray-500 mb-4">No documents in this folder</p>
+            <p className="text-gray-500 mb-4">此文件夹中没有文档</p>
             <button onClick={createNote} className="btn-primary">
               Create Your First Note
             </button>

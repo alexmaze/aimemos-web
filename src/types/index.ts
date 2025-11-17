@@ -1,4 +1,4 @@
-// Auth types
+// 认证类型
 export interface UserLogin {
   user_id: string;
   password: string;
@@ -11,7 +11,7 @@ export interface Token {
   token_type: string;
 }
 
-// Memo types
+// 备忘录类型
 export interface Memo {
   id: string;
   user_id: string;
@@ -41,7 +41,7 @@ export interface MemoListResponse {
   limit: number;
 }
 
-// Knowledge Base types
+// 知识库类型
 export interface KnowledgeBase {
   id: string;
   user_id: string;
@@ -71,7 +71,7 @@ export interface KnowledgeBaseListResponse {
   limit: number;
 }
 
-// Document types
+// 文档类型
 export interface Document {
   id: string;
   knowledge_base_id: string;
@@ -117,7 +117,7 @@ export interface DocumentListResponse {
   limit: number;
 }
 
-// Chat types
+// 聊天类型
 export interface ChatSession {
   id: string;
   user_id: string;
@@ -156,7 +156,7 @@ export interface ChatMessageCreate {
   content: string;
 }
 
-// RAG types
+// RAG 类型
 export interface RAGSearchRequest {
   query: string;
   kb_id?: string;

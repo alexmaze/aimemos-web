@@ -20,7 +20,7 @@ export default function Login() {
       await login({ user_id: userId, password });
       navigate('/');
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Login failed. Please try again.');
+      setError(err.response?.data?.detail || '登录失败，请重试。');
     } finally {
       setLoading(false);
     }
@@ -32,7 +32,7 @@ export default function Login() {
         <div className="bg-white rounded-apple shadow-apple-lg p-8">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">AI Memos</h1>
-            <p className="text-gray-600">Sign in to your account</p>
+            <p className="text-gray-600">登录您的账户</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -47,7 +47,7 @@ export default function Login() {
                 htmlFor="userId"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
-                User ID
+                用户 ID
               </label>
               <input
                 id="userId"
@@ -55,7 +55,7 @@ export default function Login() {
                 value={userId}
                 onChange={(e) => setUserId(e.target.value)}
                 className="input-field"
-                placeholder="Enter your user ID"
+                placeholder="输入您的用户 ID"
                 required
                 minLength={3}
                 autoFocus
@@ -67,7 +67,7 @@ export default function Login() {
                 htmlFor="password"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
-                Password
+                密码
               </label>
               <input
                 id="password"
@@ -75,7 +75,7 @@ export default function Login() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="input-field"
-                placeholder="Enter your password"
+                placeholder="输入您的密码"
                 required
                 minLength={6}
               />
@@ -86,18 +86,18 @@ export default function Login() {
               disabled={loading}
               className="btn-primary w-full"
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? '登录中...' : '登录'}
             </button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              Don't have an account?{' '}
+              还没有账户？{' '}
               <Link
                 to="/register"
                 className="text-blue-600 hover:text-blue-700 font-medium"
               >
-                Sign up
+                注册
               </Link>
             </p>
           </div>
