@@ -12,16 +12,40 @@ interface AuthState {
   initialize: () => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  isAuthenticated: false,
-  userId: null,
-  token: null,
+// 在同步创建 store 时读取 localStorage，避免首次渲染闪烁/重定向问题
+const getInitialAuth = () => {
+  if (typeof window === 'undefined') {
+    return {
+      isAuthenticated: false,
+      userId: null,
+      token: null,
+    };
+  }
+  const token = localStorage.getItem('access_token');
+  const userId = localStorage.getItem('user_id');
+  const isAuthenticated = Boolean(token && userId);
+  return {
+    isAuthenticated,
+    userId,
+    token,
+  };
+};
 
+const initial = getInitialAuth();
+
+export const useAuthStore = create<AuthState>((set) => ({
+  isAuthenticated: initial.isAuthenticated,
+  userId: initial.userId,
+  token: initial.token,
+
+  // 兼容方法：如果你在别处还调用 initialize，可以继续使用它
   initialize: () => {
     const token = localStorage.getItem('access_token');
     const userId = localStorage.getItem('user_id');
     if (token && userId) {
       set({ isAuthenticated: true, token, userId });
+    } else {
+      set({ isAuthenticated: false, token: null, userId: null });
     }
   },
 
