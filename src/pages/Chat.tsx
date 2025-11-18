@@ -8,6 +8,7 @@ import {
   BookOpen,
 } from 'lucide-react';
 import Layout from '../components/Layout';
+import MessageRenderer from '../components/MessageRenderer';
 import { chatApi } from '../api/chats';
 import { knowledgeBaseApi } from '../api/knowledgeBases';
 import type {
@@ -301,9 +302,16 @@ export default function Chat() {
                             : 'bg-gray-100 text-gray-900'
                         }`}
                       >
-                        <div className="whitespace-pre-wrap break-words">
-                          {msg.content}
-                        </div>
+                        {msg.role === 'assistant' ? (
+                          <MessageRenderer
+                            content={msg.content}
+                            thoughts={msg.thoughts}
+                          />
+                        ) : (
+                          <div className="whitespace-pre-wrap break-words">
+                            {msg.content}
+                          </div>
+                        )}
                         {msg.rag_sources && msg.rag_sources.length > 0 && (
                           <div className="mt-3 pt-3 border-t border-gray-300">
                             <p className="text-xs font-semibold mb-2">

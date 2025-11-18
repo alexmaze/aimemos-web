@@ -142,6 +142,7 @@ export interface ChatMessage {
   session_id: string;
   role: 'user' | 'assistant';
   content: string;
+  thoughts?: string;
   rag_context?: string;
   rag_sources?: Array<{
     content: string;
