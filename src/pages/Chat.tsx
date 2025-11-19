@@ -152,7 +152,10 @@ export default function Chat() {
 
       const reader = response.body?.getReader();
       const decoder = new TextDecoder();
-      let assistantContent = '';
+      let thoughtContent = '';
+      let regularContent = '';
+      let insideThinkTag = false;
+      let buffer = '';
 
       if (reader) {
         while (true) {
@@ -167,26 +170,102 @@ export default function Chat() {
               try {
                 const data = JSON.parse(line.slice(6));
                 if (data.type === 'message' && data.content) {
-                  assistantContent += data.content;
+                  buffer += data.content;
+                  
+                  // Parse the buffer to separate thoughts from regular content
+                  let remaining = buffer;
+                  let newThought = thoughtContent;
+                  let newRegular = regularContent;
+                  
+                  while (remaining.length > 0) {
+                    if (insideThinkTag) {
+                      // Look for closing tag
+                      const closeIdx = remaining.indexOf('</think>');
+                      if (closeIdx !== -1) {
+                        // Found closing tag
+                        newThought += remaining.substring(0, closeIdx);
+                        remaining = remaining.substring(closeIdx + 8);
+                        insideThinkTag = false;
+                        buffer = remaining;
+                      } else {
+                        // Check if we might be at the start of a closing tag
+                        let possibleCloseTagStart = -1;
+                        for (let i = Math.max(0, remaining.length - 7); i < remaining.length; i++) {
+                          if ('</think>'.startsWith(remaining.substring(i))) {
+                            possibleCloseTagStart = i;
+                            break;
+                          }
+                        }
+                        
+                        if (possibleCloseTagStart !== -1) {
+                          // Might be start of closing tag, keep partial in buffer
+                          newThought += remaining.substring(0, possibleCloseTagStart);
+                          buffer = remaining.substring(possibleCloseTagStart);
+                          remaining = '';
+                        } else {
+                          // No closing tag, accumulate all in thought
+                          newThought += remaining;
+                          buffer = '';
+                          remaining = '';
+                        }
+                      }
+                    } else {
+                      // Look for opening tag
+                      const openIdx = remaining.indexOf('<think>');
+                      if (openIdx !== -1) {
+                        // Found opening tag
+                        newRegular += remaining.substring(0, openIdx);
+                        remaining = remaining.substring(openIdx + 7);
+                        insideThinkTag = true;
+                      } else {
+                        // Check if we might be at the start of a <think> tag
+                        let possibleTagStart = -1;
+                        for (let i = Math.max(0, remaining.length - 6); i < remaining.length; i++) {
+                          if ('<think>'.startsWith(remaining.substring(i))) {
+                            possibleTagStart = i;
+                            break;
+                          }
+                        }
+                        
+                        if (possibleTagStart !== -1) {
+                          // Might be start of tag, keep in buffer
+                          newRegular += remaining.substring(0, possibleTagStart);
+                          buffer = remaining.substring(possibleTagStart);
+                          remaining = '';
+                        } else {
+                          // No tag start, add all to regular content
+                          newRegular += remaining;
+                          buffer = '';
+                          remaining = '';
+                        }
+                      }
+                    }
+                  }
+                  
+                  thoughtContent = newThought;
+                  regularContent = newRegular;
+                  
                   // Update the assistant message in real-time
                   setMessages((prev) => {
                     const newMessages = [...prev];
                     const lastMsg = newMessages[newMessages.length - 1];
                     if (lastMsg && lastMsg.role === 'assistant') {
-                      lastMsg.content = assistantContent;
+                      lastMsg.content = regularContent;
+                      lastMsg.thoughts = thoughtContent || undefined;
                     } else {
                       newMessages.push({
                         id: 'temp-assistant-' + Date.now(),
                         session_id: currentSession.id,
                         role: 'assistant',
-                        content: assistantContent,
+                        content: regularContent,
+                        thoughts: thoughtContent || undefined,
                         created_at: new Date().toISOString(),
                       });
                     }
                     return newMessages;
                   });
                 }
-              } catch (e) {
+              } catch {
                 // Ignore parse errors
               }
             }

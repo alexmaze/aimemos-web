@@ -325,6 +325,30 @@ npm install --save-dev @types/dompurify
 - lucide-react (icons: ChevronDown, ChevronUp, Copy, Check)
 - TypeScript
 
+## Streaming Optimization
+
+**Status**: ✅ Implemented
+
+The chat interface now parses `<think>` tags in real-time during message streaming, ensuring the ThoughtBubble displays with correct styling from the moment the opening tag is detected.
+
+### How It Works
+
+During streaming:
+1. Content is parsed character-by-character as it arrives
+2. `<think>` tags are detected immediately, not after completion
+3. Thought content is stored in the `thoughts` field in real-time
+4. Regular content is stored in the `content` field separately
+5. ThoughtBubble displays instantly with proper styling
+
+### Benefits
+
+- ✅ No more flash of raw `<think>` tags as plain text
+- ✅ Smooth, professional streaming experience
+- ✅ Handles tags split across streaming chunks
+- ✅ Works with multiple `<think>` blocks in same message
+
+See `STREAMING_OPTIMIZATION.md` for technical details.
+
 ## Future Enhancements
 
 Potential improvements:
@@ -336,7 +360,6 @@ Potential improvements:
 5. **Search within thoughts**
 6. **Statistics** on thinking time/complexity
 7. **Settings page** for managing preferences
-8. **Streaming thoughts** during generation
 
 ## Troubleshooting
 
