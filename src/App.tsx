@@ -10,6 +10,7 @@ import KnowledgeBases from './pages/KnowledgeBases';
 import Documents from './pages/Documents';
 import DocumentEditor from './pages/DocumentEditor';
 import Chat from './pages/Chat';
+import ThoughtBubbleDemo from './pages/ThoughtBubbleDemo';
 
 function App() {
   const initialize = useAuthStore((state) => state.initialize);
@@ -68,6 +69,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Chat />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/demo/thought-bubble"
+          element={
+            <ProtectedRoute>
+              <ThoughtBubbleDemo />
             </ProtectedRoute>
           }
         />
